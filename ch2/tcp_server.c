@@ -15,7 +15,9 @@ int main(int argc, char *argv[])
     struct sockaddr_in clnt_addr;
     socklen_t clnt_addr_size;
 
-    char message[] = "Hello World!";
+    char message[] = "Hello World!"; // size 13
+    printf("len %ld", strlen(message));
+    printf("len %ld", sizeof(message));
 
     if (argc != 2)
     {
@@ -45,11 +47,6 @@ int main(int argc, char *argv[])
         error_handling("accept() error");
     //稍后要将介绍的 write 函数用于传输数据，若程序经过 accept 这一行执行到本行，则说明已经有了连接请求
     write(clnt_sock, message, sizeof(message));
-    // multiple writing
-    // for (int i = 0; i < 13; i++) {
-    //     write(clnt_sock, &message[i], 1);
-    // }
-
     close(clnt_sock);
     close(serv_sock);
     return 0;
